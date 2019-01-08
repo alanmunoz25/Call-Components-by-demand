@@ -10,9 +10,10 @@ class App extends Component {
     
     this.state = {
       loadedComponents: [],
-      components: []
+      components: [],
     };
   }
+
   
   addView = async viewName => {
     // Don't load more than once.
@@ -22,14 +23,17 @@ class App extends Component {
 
     import(`./views/${viewName}.js`)
       .then(Component => {
+
         this.setState({
-          loadedComponents: this.state.loadedComponents.concat(viewName),
-          components: this.state.components.concat(
+          
+          loadedComponents:[].concat(viewName),
+          components: [].concat(
             <Component.default
               key={shortid.generate()}
               data={this.props.data}
             />
           )
+
         });
       })
       .catch(error => {
@@ -69,6 +73,7 @@ class App extends Component {
           <div>
             <button id="null" onClick={this.handleNullGraphChange}>Not yet implemented</button>
           </div>
+
         </div>
         <div className="views">
           {components.length === 0 ? (
